@@ -5,6 +5,7 @@
  */
 package services;
 
+import com.generation.beans.Tokens;
 import com.generation.beans.Users;
 import dao.GenericDao;
 import java.io.BufferedReader;
@@ -62,7 +63,8 @@ public class Login extends HttpServlet {
         resp.setContentType("application/json");
         BufferedReader br = req.getReader();
         StringBuilder sb = new StringBuilder("");
-        JSONObject jsono;
+        JSONObject jsono, result;
+        
         String str;
         while ((str = br.readLine()) != null) {
             sb.append(str);
@@ -71,13 +73,23 @@ public class Login extends HttpServlet {
         if (!sb.toString().equals("")) {
             try {
                 jsono = new JSONObject(sb.toString());
-                String name = (String) jsono.opt("user");
-                String pass = (String) jsono.opt("pass");
+                String tkn = jsono.optString("tkn", "null");
+                String name = (String) jsono.opt("auth");
                 GenericDao dao = new GenericDao();
+                List<Tokens> tokense = dao.getByParameter(Tokens.class.getSimpleName(), "token", tkn);
+                
+                
+                
+                
+                String pass = (String) jsono.opt("pass");
+                
+                
                 List<Users> list = dao.getAll(Users.class.getSimpleName());
                 jsono = new JSONObject();
-                jsono.put("result", "unsuccess");
-                jsono.put("value", "wrong user or pass");
+                result = new JSONObject();
+                
+                //jsono.put("userId", "unsuccess");
+                result.put("message", "wrong user or pass");
                 for (Users user : list) {
                     if (name.equals(user.getNick()) && pass.equals(user.getPass())) {
 
@@ -89,16 +101,19 @@ public class Login extends HttpServlet {
                 }
             } catch (JSONException | NullPointerException je) {
                 System.err.println(je.toString());
+                result = new JSONObject();
                 jsono = new JSONObject();
                 jsono.put("result", "unsuccess");
                 jsono.put("value", "JSON malformed");
                 jsono.put("received", sb);
             }
         } else {
+            result = new JSONObject();
             jsono = new JSONObject();
             jsono.put("result", "unsuccess");
             jsono.put("value", "json hasn't received");
         }
+        result.put("status", "200");
         PrintWriter pw = resp.getWriter();
         pw.print(jsono);
         pw.flush();

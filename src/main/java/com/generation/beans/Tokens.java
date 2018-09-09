@@ -87,7 +87,7 @@ public class Tokens  implements java.io.Serializable {
 
     @Override
     public String toString() {
-        return "Tokens{" + "idToken=" + idToken + ", users=" + users + ", token=" + token + ", date=" + date + ", status=" + status + ", key=" + key + ", turn=" + turn + '}';
+        return "Tokens{" + "idToken=" + idToken + ", users=" + users.getIdUser() + ", token=" + token + ", date=" + date.toString() + ", status=" + status + ", key=" + key + ", turn=" + turn + '}';
     }
 
     @Override

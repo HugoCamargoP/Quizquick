@@ -78,24 +78,34 @@ public class GenericDao<T> {
         T t = null;
         try {
             initOperation();
-            t =  (T) session.get(classT.getClass(), id);
+            t = (T) session.get((Class) classT, id);
         } finally {
             session.close();
         }
         return t;
     }
 
-    public List<T> getAll(String t) {
-         List<T>  list = null;
-       try {
-           initOperation();
-           list = session.createQuery("from " + t).list();
-           //users = session.createQuery("from " + columna).list();
-           
-       } finally {
-           session.close();
-       }
-       return list;
+    public List<T> getAll(String classT) {
+        List<T> list = null;
+        try {
+            initOperation();
+            list = session.createQuery("from " + classT).list();
+
+        } finally {
+            session.close();
+        }
+        return list;
+    }
+
+    public List<T> getByParameter(String classT, String  col, String target) {
+        List<T> list = null;
+        try {
+            initOperation();
+            list = session.createQuery("from " + classT + " where " + col + " = \'" + target + "\'").list();
+        } finally {
+            session.close();
+        }
+        return list;
     }
 
 }
