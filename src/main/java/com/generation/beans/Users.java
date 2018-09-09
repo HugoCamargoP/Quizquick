@@ -72,7 +72,12 @@ public class Users  implements java.io.Serializable {
         this.questionses = questionses;
     }
 
+    @Override
+    public String toString() {
+        return "Users{" + "idUser=" + idUser + ", mail=" + mail + ", pass=" + pass + ", nick=" + nick + ", tokenses=" + tokenses + ", questionses=" + questionses + '}';
+    }
 
+    
 
 
 }

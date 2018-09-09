@@ -3,6 +3,7 @@ package com.generation.beans;
 
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -45,8 +46,45 @@ public class Modules  implements java.io.Serializable {
         this.topicses = topicses;
     }
 
+    @Override
+    public String toString() {
+        return "Modules{" + "idModule=" + idModule + ", nombreModule=" + nombreModule + ", topicses=" + topicses + '}';
+    }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + Objects.hashCode(this.idModule);
+        hash = 89 * hash + Objects.hashCode(this.nombreModule);
+        hash = 89 * hash + Objects.hashCode(this.topicses);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Modules other = (Modules) obj;
+        if (!Objects.equals(this.nombreModule, other.nombreModule)) {
+            return false;
+        }
+        if (!Objects.equals(this.idModule, other.idModule)) {
+            return false;
+        }
+        if (!Objects.equals(this.topicses, other.topicses)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 
 }
 

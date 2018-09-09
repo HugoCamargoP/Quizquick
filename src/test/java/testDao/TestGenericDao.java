@@ -41,7 +41,7 @@ public class TestGenericDao {
         Prueba p = new Prueba();
         Modules m = new Modules();
         p.prueba(m);
-        
+//        
         p.consulta();
     }
     
@@ -51,8 +51,8 @@ public class TestGenericDao {
 
 class Prueba <T> {
     public void prueba (T t) {
-        System.out.println(t.getClass());
-        
+        System.out.println("Only getClass() " + t.getClass());
+        System.out.println("With simpleName()" + t.getClass().getSimpleName());
         Object obj = new Object();
         
     }
@@ -63,6 +63,6 @@ class Prueba <T> {
         for (Tokens usu : users) {
             System.out.println(usu.toString());
         }
-         System.out.println(List.class.cast(Tokens.class.cast(users.get(0)).getStatus()).get(0).toString());
+        System.out.println(List.class.cast(Tokens.class.cast(users.get(0)).getStatus()).get(0).toString());
     }
 }

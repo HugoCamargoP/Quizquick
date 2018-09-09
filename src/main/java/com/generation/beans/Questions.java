@@ -3,6 +3,7 @@ package com.generation.beans;
 
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -103,7 +104,69 @@ public class Questions  implements java.io.Serializable {
         this.userses = userses;
     }
 
+    @Override
+    public String toString() {
+        return "Questions{" + "idQuestion=" + idQuestion + ", subtopics=" + subtopics + ", question=" + question + ", answer1=" + answer1 + ", answer2=" + answer2 + ", answer3=" + answer3 + ", answer4=" + answer4 + ", correctAnswer=" + correctAnswer + ", userses=" + userses + '}';
+    }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 23 * hash + Objects.hashCode(this.idQuestion);
+        hash = 23 * hash + Objects.hashCode(this.subtopics);
+        hash = 23 * hash + Objects.hashCode(this.question);
+        hash = 23 * hash + Objects.hashCode(this.answer1);
+        hash = 23 * hash + Objects.hashCode(this.answer2);
+        hash = 23 * hash + Objects.hashCode(this.answer3);
+        hash = 23 * hash + Objects.hashCode(this.answer4);
+        hash = 23 * hash + Objects.hashCode(this.correctAnswer);
+        hash = 23 * hash + Objects.hashCode(this.userses);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Questions other = (Questions) obj;
+        if (!Objects.equals(this.question, other.question)) {
+            return false;
+        }
+        if (!Objects.equals(this.answer1, other.answer1)) {
+            return false;
+        }
+        if (!Objects.equals(this.answer2, other.answer2)) {
+            return false;
+        }
+        if (!Objects.equals(this.answer3, other.answer3)) {
+            return false;
+        }
+        if (!Objects.equals(this.answer4, other.answer4)) {
+            return false;
+        }
+        if (!Objects.equals(this.idQuestion, other.idQuestion)) {
+            return false;
+        }
+        if (!Objects.equals(this.subtopics, other.subtopics)) {
+            return false;
+        }
+        if (!Objects.equals(this.correctAnswer, other.correctAnswer)) {
+            return false;
+        }
+        if (!Objects.equals(this.userses, other.userses)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 
 
 }

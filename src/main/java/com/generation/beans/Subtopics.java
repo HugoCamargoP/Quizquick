@@ -3,6 +3,7 @@ package com.generation.beans;
 
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -58,7 +59,49 @@ public class Subtopics  implements java.io.Serializable {
         this.questionses = questionses;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.idsubtopics);
+        hash = 79 * hash + Objects.hashCode(this.topics);
+        hash = 79 * hash + Objects.hashCode(this.nombreSubtopic);
+        hash = 79 * hash + Objects.hashCode(this.questionses);
+        return hash;
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Subtopics other = (Subtopics) obj;
+        if (!Objects.equals(this.nombreSubtopic, other.nombreSubtopic)) {
+            return false;
+        }
+        if (!Objects.equals(this.idsubtopics, other.idsubtopics)) {
+            return false;
+        }
+        if (!Objects.equals(this.topics, other.topics)) {
+            return false;
+        }
+        if (!Objects.equals(this.questionses, other.questionses)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Subtopics{" + "idsubtopics=" + idsubtopics + ", topics=" + topics + ", nombreSubtopic=" + nombreSubtopic + ", questionses=" + questionses + '}';
+    }
+
+    
 
 
 }
