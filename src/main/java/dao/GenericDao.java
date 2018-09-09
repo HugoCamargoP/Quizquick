@@ -85,17 +85,17 @@ public class GenericDao<T> {
         return t;
     }
 
-    public List<T> getAll(String columna) {
-         List<T>  t = null;
+    public List<T> getAll(T t) {
+         List<T>  list = null;
        try {
            initOperation();
-           t = session.createQuery("from "+ columna).list();
+           list = session.createQuery("from "+ t).list();
            //users = session.createQuery("from " + columna).list();
            
        } finally {
            session.close();
        }
-       return t;
+       return list;
     }
 
 }
