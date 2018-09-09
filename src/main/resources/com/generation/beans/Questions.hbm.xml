@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 8/09/2018 07:09:44 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.generation.beans.Questions" table="questions" catalog="sql9255875" optimistic-lock="version">
+        <id name="idQuestion" type="java.lang.Integer">
+            <column name="id_question" />
+            <generator class="identity" />
+        </id>
+        <property name="question" type="string">
+            <column name="question" length="65535" />
+        </property>
+        <property name="answer1" type="string">
+            <column name="answer1" length="65535" />
+        </property>
+        <property name="answer2" type="string">
+            <column name="answer2" length="65535" />
+        </property>
+        <property name="answer3" type="string">
+            <column name="answer3" length="65535" />
+        </property>
+        <property name="answer4" type="string">
+            <column name="answer4" length="65535" />
+        </property>
+        <property name="correctAnswer" type="java.lang.Boolean">
+            <column name="correct_answer" />
+        </property>
+        <property name="topicsIdTopic" type="int">
+            <column name="topics_id_topic" not-null="true" />
+        </property>
+        <property name="topicsModulesIdModule" type="int">
+            <column name="topics_modules_id_module" not-null="true" />
+        </property>
+        <property name="subtopicsIdsubtopics" type="int">
+            <column name="subtopics_idsubtopics" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 8/09/2018 07:09:44 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.generation.beans.QuestionsHasUsers" table="questions_has_users" catalog="sql9255875" optimistic-lock="version">
+        <composite-id name="id" class="com.generation.beans.QuestionsHasUsersId">
+            <key-property name="questionsIdQuestion" type="int">
+                <column name="questions_id_question" />
+            </key-property>
+            <key-property name="questionsTopicsIdTopic" type="int">
+                <column name="questions_topics_id_topic" />
+            </key-property>
+            <key-property name="questionsTopicsModulesIdModule" type="int">
+                <column name="questions_topics_modules_id_module" />
+            </key-property>
+            <key-property name="usersIdUser" type="int">
+                <column name="users_id_user" />
+            </key-property>
+        </composite-id>
+    </class>
+</hibernate-mapping>
