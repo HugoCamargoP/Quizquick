@@ -11,6 +11,7 @@ import com.generation.beans.Modules;
 import com.generation.beans.Tokens;
 import dao.GenericDao;
 import java.util.List;
+import util.Hash256;
 
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
@@ -26,25 +27,11 @@ import java.util.List;
  */
 //@RunWith(MockitoJUnitRunner.class)
 public class TestGenericDao {
-//    
-//    @Mock
-//    Modules m;
-//    
-//    @Test
-//    public void primero () {
-//        System.out.println(Integer.class);
-//    }
-    
+
     public static void main(String[] args) {
-        System.out.println("Maaaa" + Modules.class);
-        Prueba p = new Prueba();
-        Modules m = new Modules();
-//        p.prueba(m);
-////        
-//          p.consulta();
-          //p.consultaCol();
-          String pass = "Hola qwwwwwwwwwwwwwwwwww";
-          System.out.println("Hash " + pass.hashCode());
+      Hash256 nuevo = new Hash256();
+      String segun = nuevo.convertirSHA256("perrochoncho");
+        System.out.println("HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLAAAAAAAAAAAAA" +segun);
     }
     
     
@@ -79,4 +66,6 @@ class Prueba <T> {
             list = dao.getByParameter(Tokens.class.getSimpleName(), "token", "FFFF");
             System.out.println((!list.isEmpty()) ? list.get(0) : "null");
         }
+        Hash256 nuevo = new Hash256();
+        
 }
