@@ -74,11 +74,11 @@ public class genericDao<T> {
         }
     }
 
-    public T get(int id) {
+    public T get(int id, T classT) {
         T t = null;
         try {
             initOperation();
-            t = (T) session.get(T.class, id);
+            t =  (T) session.get(classT.getClass(), id);
         } finally {
             session.close();
         }
