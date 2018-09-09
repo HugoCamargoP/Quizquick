@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -49,7 +48,8 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        
+        resp.setHeader("Access-Control-Allow-Origin", "*");
+        resp.setHeader("Access-Control-Allow-Methods", "POST");
         req.setCharacterEncoding("utf-8");
         resp.setContentType("application/json");
         BufferedReader br = req.getReader();
@@ -58,17 +58,22 @@ public class Login extends HttpServlet {
                 String str;
         while ((str = br.readLine()) != null) {
             sb.append(str);
-        }        
+        }  
+        System.out.println(sb.toString());
         if (!sb.toString().equals("")) {
             jsono = new JSONObject(sb.toString());
             String name = jsono.optString("user", "null");
             String pass = jsono.optString("pass", "null");
+            System.out.println(name + "  " + pass);
             if (name.equals("shavadaba") && pass.equals("teamo")) {
+                jsono = new JSONObject();
                 jsono.put("result", "success");
                 jsono.put("tk", "FFFF");
             } else {
                 jsono = new JSONObject();
                 jsono.put("result", "unsuccess");
+                jsono.put("value", "wrong user or pass");
+                
             }
         } else {
             jsono = new JSONObject();
