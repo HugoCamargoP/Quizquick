@@ -11,9 +11,14 @@ package testDao;
 //import org.mockito.Mock;
 //import org.mockito.runners.MockitoJUnitRunner;
 
-
+//
+//import com.generation.beans.Modules;
+//import com.generation.beans.Users;
 import com.generation.beans.Modules;
-import java.lang.Integer;
+import com.generation.beans.Tokens;
+import com.generation.beans.Users;
+import dao.GenericDao;
+import java.util.List;
 
 
 /**
@@ -36,6 +41,8 @@ public class TestGenericDao {
         Prueba p = new Prueba();
         Modules m = new Modules();
         p.prueba(m);
+        
+        p.consulta();
     }
     
     
@@ -45,5 +52,17 @@ public class TestGenericDao {
 class Prueba <T> {
     public void prueba (T t) {
         System.out.println(t.getClass());
+        
+        Object obj = new Object();
+        
+    }
+    
+     public void consulta () {
+        GenericDao dao = new GenericDao();
+        List<Tokens> users = dao.getAll(Tokens.class.getSimpleName());
+        for (Tokens usu : users) {
+            System.out.println(usu.toString());
+        }
+         System.out.println(List.class.cast(Tokens.class.cast(users.get(0)).getStatus()).get(0).toString());
     }
 }

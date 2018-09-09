@@ -1,18 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 8/09/2018 07:09:44 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 9/09/2018 04:34:07 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.generation.beans.Topics" table="topics" catalog="sql9255875" optimistic-lock="version">
         <id name="idTopic" type="java.lang.Integer">
             <column name="id_topic" />
             <generator class="identity" />
         </id>
+        <many-to-one name="modules" class="com.generation.beans.Modules" fetch="select">
+            <column name="modules_id_module" not-null="true" />
+        </many-to-one>
         <property name="nombreTopic" type="string">
             <column name="nombre_topic" length="45" />
         </property>
-        <property name="modulesIdModule" type="java.lang.Integer">
-            <column name="modules_id_module" />
-        </property>
+        <set name="subtopicses" table="subtopics" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="topics_id_topic" not-null="true" />
+            </key>
+            <one-to-many class="com.generation.beans.Subtopics" />
+        </set>
     </class>
 </hibernate-mapping>

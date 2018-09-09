@@ -1,5 +1,5 @@
 package com.generation.beans;
-// Generated 8/09/2018 07:09:43 PM by Hibernate Tools 4.3.1
+// Generated 9/09/2018 04:34:06 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -11,29 +11,27 @@ public class Tokens  implements java.io.Serializable {
 
 
      private Integer idToken;
+     private Users users;
      private String token;
      private Date date;
-     private String status;
-     private Boolean tokenscol;
+     private Integer status;
      private String key;
      private String turn;
-     private int usersIdUser;
 
     public Tokens() {
     }
 
 	
-    public Tokens(int usersIdUser) {
-        this.usersIdUser = usersIdUser;
+    public Tokens(Users users) {
+        this.users = users;
     }
-    public Tokens(String token, Date date, String status, Boolean tokenscol, String key, String turn, int usersIdUser) {
+    public Tokens(Users users, String token, Date date, Integer status, String key, String turn) {
+       this.users = users;
        this.token = token;
        this.date = date;
        this.status = status;
-       this.tokenscol = tokenscol;
        this.key = key;
        this.turn = turn;
-       this.usersIdUser = usersIdUser;
     }
    
     public Integer getIdToken() {
@@ -42,6 +40,13 @@ public class Tokens  implements java.io.Serializable {
     
     public void setIdToken(Integer idToken) {
         this.idToken = idToken;
+    }
+    public Users getUsers() {
+        return this.users;
+    }
+    
+    public void setUsers(Users users) {
+        this.users = users;
     }
     public String getToken() {
         return this.token;
@@ -57,19 +62,12 @@ public class Tokens  implements java.io.Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-    public String getStatus() {
+    public Integer getStatus() {
         return this.status;
     }
     
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
-    }
-    public Boolean getTokenscol() {
-        return this.tokenscol;
-    }
-    
-    public void setTokenscol(Boolean tokenscol) {
-        this.tokenscol = tokenscol;
     }
     public String getKey() {
         return this.key;
@@ -84,13 +82,6 @@ public class Tokens  implements java.io.Serializable {
     
     public void setTurn(String turn) {
         this.turn = turn;
-    }
-    public int getUsersIdUser() {
-        return this.usersIdUser;
-    }
-    
-    public void setUsersIdUser(int usersIdUser) {
-        this.usersIdUser = usersIdUser;
     }
 
 

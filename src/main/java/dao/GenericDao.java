@@ -16,7 +16,7 @@ import org.hibernate.Transaction;
  * @author root
  * @param <T>
  */
-public class genericDao<T> {
+public class GenericDao<T> {
 
     private Session session;
     private Transaction tx;
@@ -90,6 +90,8 @@ public class genericDao<T> {
        try {
            initOperation();
            t = session.createQuery("from "+ columna).list();
+           //users = session.createQuery("from " + columna).list();
+           
        } finally {
            session.close();
        }

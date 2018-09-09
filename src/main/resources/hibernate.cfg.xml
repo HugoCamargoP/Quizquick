@@ -51,7 +51,6 @@ Contributor(s):
     <mapping resource="com/generation/beans/Users.hbm.xml"/>
     <mapping resource="com/generation/beans/Subtopics.hbm.xml"/>
     <mapping resource="com/generation/beans/Questions.hbm.xml"/>
-    <mapping resource="com/generation/beans/QuestionsHasUsers.hbm.xml"/>
     <mapping resource="com/generation/beans/Topics.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

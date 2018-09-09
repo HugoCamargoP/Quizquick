@@ -41,11 +41,11 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="sql9255875"/>
-  <table-filter match-name="questions"/>
-  <table-filter match-name="subtopics"/>
-  <table-filter match-name="topics"/>
-  <table-filter match-name="tokens"/>
-  <table-filter match-name="modules"/>
-  <table-filter match-name="questions_has_users"/>
   <table-filter match-name="users"/>
+  <table-filter match-name="users_has_questions"/>
+  <table-filter match-name="subtopics"/>
+  <table-filter match-name="tokens"/>
+  <table-filter match-name="questions"/>
+  <table-filter match-name="modules"/>
+  <table-filter match-name="topics"/>
 </hibernate-reverse-engineering>

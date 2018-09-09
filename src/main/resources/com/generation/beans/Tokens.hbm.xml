@@ -1,33 +1,30 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 8/09/2018 07:09:44 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 9/09/2018 04:34:07 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="com.generation.beans.Tokens" table="tokens" catalog="sql9255875" optimistic-lock="version">
         <id name="idToken" type="java.lang.Integer">
             <column name="id_token" />
             <generator class="identity" />
         </id>
+        <many-to-one name="users" class="com.generation.beans.Users" fetch="select">
+            <column name="users_id_user" not-null="true" />
+        </many-to-one>
         <property name="token" type="string">
             <column name="token" length="45" />
         </property>
         <property name="date" type="date">
             <column name="date" length="10" />
         </property>
-        <property name="status" type="string">
-            <column name="status" length="45" />
-        </property>
-        <property name="tokenscol" type="java.lang.Boolean">
-            <column name="tokenscol" />
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
         </property>
         <property name="key" type="string">
             <column name="key" length="45" />
         </property>
         <property name="turn" type="string">
             <column name="turn" length="45" />
-        </property>
-        <property name="usersIdUser" type="int">
-            <column name="users_id_user" not-null="true" />
         </property>
     </class>
 </hibernate-mapping>
