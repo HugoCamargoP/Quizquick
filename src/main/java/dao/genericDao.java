@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 /**
  *
  * @author root
+ * @param <T>
  */
 public class genericDao<T> {
 
