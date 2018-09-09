@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 /**
  *
  * @author root
+ * @param <T>
  */
 public class genericDao <T>{
 
