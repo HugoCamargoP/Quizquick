@@ -5,42 +5,95 @@
  */
 package dao;
 
+import hibernate.HibernateUtil;
 import java.util.List;
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
  * @author root
  * @param <T>
  */
-public class genericDao <T>{
+public class genericDao<T> {
+
+    private Session session;
+    private Transaction tx;
 
     public void initOperation() throws HibernateException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session = HibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
     }
 
-    public void handleException(T t) throws HibernateException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void manejaException(HibernateException he) throws HibernateException {
+        tx.rollback();
+        throw new UnsupportedOperationException("Ocurrio un error en la capa de datos" + he);
     }
 
     public int save(T t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = 0;
+        try {
+            initOperation();
+            id = (int) session.save(t);
+            tx.commit();
+        } catch (HibernateException he) {
+            manejaException(he);
+            throw he;
+        } finally {
+            session.close();
+        }
+        return id;
     }
 
-    public int update(T t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(T t) {
+        try {
+            initOperation();
+            session.update(t);
+            tx.commit();
+            return true;
+        } catch (HibernateException he) {
+            manejaException(he);
+            throw he;
+        } finally {
+            session.close();
+        }
     }
 
-    public int delete(T t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(T t) {
+        try {
+            initOperation();
+            session.delete(t);
+            tx.commit();
+            return true;
+        } catch (HibernateException he) {
+            manejaException(he);
+            throw he;
+        } finally {
+            session.close();
+        }
     }
 
     public T get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        T t = null;
+        try {
+            initOperation();
+            t = (T) session.get(T.class, id);
+        } finally {
+            session.close();
+        }
+        return t;
     }
 
-    public List<T> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<T> getAll(String columna) {
+         List<T>  t = null;
+       try {
+           initOperation();
+           t = session.createQuery("from "+ columna).list();
+       } finally {
+           session.close();
+       }
+       return t;
     }
-    
+
 }
