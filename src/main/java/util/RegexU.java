@@ -30,4 +30,10 @@ public class RegexU {
         Matcher m = p.matcher(input);
         return m.matches();
     }
+    
+    public static boolean isValidToken ( String input) {
+        Pattern p = Pattern.compile("^[A-Za-z0-9]{40}[{punct}:]{1}[0-9]+");
+        Matcher m = p.matcher(input);
+        return m.matches();
+    }
 }

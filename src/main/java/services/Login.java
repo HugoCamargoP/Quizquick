@@ -11,6 +11,8 @@ import dao.GenericDao;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
+import util.Hash;
 import util.RegexU;
+import util.SearchToken;
 
 
 /*
@@ -79,51 +83,102 @@ public class Login extends HttpServlet {
                 GenericDao dao = new GenericDao();
                 List<Tokens> tokense = dao.getByParameter(Tokens.class.getSimpleName(), "token", tkn);
                 if (RegexU.isValidMail(auth) || RegexU.isValidNick(auth)) {
-                    if (tokense.isEmpty()) {
+                    if (tkn.equals("null")) {
                         String pass = (String) jsono.opt("pass");
                         List<Users> list = dao.getAll(Users.class.getSimpleName());
-                        jsono = new JSONObject();
-                        result = new JSONObject();
-
-                        //jsono.put("userId", "unsuccess");
-                        result.put("message", "wrong user or pass");
-                        for (Users user : list) {
-                            if (auth.equals(user.getNick()) && pass.equals(user.getPass())) {
-
-                                jsono = new JSONObject();
-                                jsono.put("result", "success");
-                                jsono.put("tk", "FFFF");
-                                break;
+                        Users us = null;
+                        for (Users users : list) {
+                            if (users.getMail().equals(auth) || users.getNick().equals(auth)) {
+                                us = users;
                             }
                         }
+                        if (us != null) {
+                            if (pass.equals(us.getPass())) {
+                                long da = System.currentTimeMillis();
+                                boolean ban;
+                                do {
+                                    ban = false;
+                                    if (SearchToken.search(Hash.convertirSHA_1(Long.toString(da)))) {
+                                        da--;
+                                        ban = true;
+                                    }
+                                } while (ban);
+                                String tok = Hash.convertirSHA_1(Long.toString(da));
+                                tokense = dao.getByParameter(Tokens.class.getSimpleName(), "users_id_user", us.getIdUser().toString());
+                                if (!tokense.isEmpty()) {
+                                    //Tokens aux;
+                                    for (Tokens aux : tokense) {
+                                        aux.setStatus(0);
+                                        dao.update(aux);
+                                    }
+                                }
+                                Tokens token = new Tokens();
+                                token.setDate(new Date());
+                                token.setKey("0");
+                                token.setStatus(1);
+                                token.setTurn(tok.substring(0, 0));
+                                token.setToken(tok);
+                                token.setUsers(us);
+                                dao.save(token);
+                                result = new JSONObject();
+                                result.put("result", "success");
+                                result.put("message", "login created");
+                                jsono = new JSONObject();
+                                jsono.put("tkn", tok + ":" + us.getIdUser().toString());
+                                result.put("data", jsono);
+                                System.out.println("Success");
+                            } else {
+                                System.out.println("Pass wrong");
+                                result = new JSONObject();
+                                result.put("result", "error");
+                                result.put("message", "password or email incorrect");
+                            }
+                        } else {
+                            System.out.println("auth incorrect");
+                            result = new JSONObject();
+                            result.put("result", "error");
+                            result.put("message", "password or email incorrect");
+                        }
                     } else {
-                        if (tokense.get(0).getStatus().equals("1")) {
-
+                        if (RegexU.isValidToken(tkn)) {
+                            System.out.println("tkn unecesary");
+                            result = new JSONObject ();
+                            result.put("result", "error");
+                            result.put("message", "thank you but not thank you");
+                        } else {
+                            System.out.println("tkn malformed");
+                            result = new JSONObject();
+                            result.put("result", "error");
+                            result.put("message", "nick, email or tkn malformed");
                         }
                     }
                 } else {
-                    jsono = new JSONObject();
-                    jsono.put("result", "error");
-                    jsono.put("message", "nick or password malformed");
+                    System.out.println("auth malformed");
+                    result = new JSONObject();
+                    result.put("result", "error");
+                    result.put("message", "nick, email or tkn malformed");
                 }
 
             } catch (JSONException | NullPointerException je) {
                 System.err.println(je.toString());
+                System.err.println("Json malformed");
                 result = new JSONObject();
                 jsono = new JSONObject();
-                jsono.put("result", "error");
-                jsono.put("value", "JSON malformed");
+                result.put("result", "error");
+                result.put("message", "JSON malformed");
                 jsono.put("received", sb);
+                result.put("data", jsono);
             }
         } else {
+            System.out.println("json hasn't received");
             result = new JSONObject();
-            jsono = new JSONObject();
-            jsono.put("result", "error");
-            jsono.put("value", "json hasn't received");
+            result.put("result", "error");
+            result.put("message", "json hasn't received");
         }
-        //result.put("status", "200");
+        System.out.println("Success: " + result.toString()) ;
+        result.put("status", "200");
         PrintWriter pw = resp.getWriter();
-        pw.print(jsono);
+        pw.print(result);
         pw.flush();
     }
 

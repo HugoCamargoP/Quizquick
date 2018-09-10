@@ -17,7 +17,7 @@ public class SearchToken {
     
     public SearchToken() {}
 
-    private boolean search(String token) {
+    public static boolean search(String token) {
         GenericDao dao = new GenericDao();
         List<Token> list = dao.getByParameter(Token.class.getSimpleName(), "token", token);
         return !(list.isEmpty());

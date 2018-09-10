@@ -10,6 +10,7 @@ package testDao;
 import com.generation.beans.Modules;
 import com.generation.beans.Tokens;
 import dao.GenericDao;
+import java.util.Date;
 import java.util.List;
 import util.Hash;
 import util.RegexU;
@@ -31,8 +32,10 @@ public class TestGenericDao {
 
     public static void main(String[] args) {
         //System.out.println(RegexU.isMail("nincub111._-@com.mx"));
-        String a = Hash.convertirSHA_1("adssssssssssssssshola"); 
-        System.out.println(RegexU.isValidHash_1("asa"));
+        String a = Hash.convertirSHA_1("adssssssssssssssshola");
+        System.out.println(a);
+        System.out.println(RegexU.isValidToken(a + ":11111"));
+        
     }
     
     

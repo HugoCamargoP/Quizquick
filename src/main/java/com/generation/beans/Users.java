@@ -3,6 +3,7 @@ package com.generation.beans;
 
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -77,6 +78,52 @@ public class Users  implements java.io.Serializable {
         return "Users{" + "idUser=" + idUser + ", mail=" + mail + ", pass=" + pass + ", nick=" + nick + ", tokenses=" + tokenses + ", questionses=" + questionses + '}';
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.idUser);
+        hash = 17 * hash + Objects.hashCode(this.mail);
+        hash = 17 * hash + Objects.hashCode(this.pass);
+        hash = 17 * hash + Objects.hashCode(this.nick);
+        hash = 17 * hash + Objects.hashCode(this.tokenses);
+        hash = 17 * hash + Objects.hashCode(this.questionses);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Users other = (Users) obj;
+        if (!Objects.equals(this.mail, other.mail)) {
+            return false;
+        }
+        if (!Objects.equals(this.pass, other.pass)) {
+            return false;
+        }
+        if (!Objects.equals(this.nick, other.nick)) {
+            return false;
+        }
+        if (!Objects.equals(this.idUser, other.idUser)) {
+            return false;
+        }
+        if (!Objects.equals(this.tokenses, other.tokenses)) {
+            return false;
+        }
+        if (!Objects.equals(this.questionses, other.questionses)) {
+            return false;
+        }
+        return true;
+    }
+
+    
     
 
 
