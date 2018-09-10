@@ -81,14 +81,14 @@ public class Login extends HttpServlet {
                 String tkn = jsono.optString("tkn", "null");
                 String auth = (String) jsono.opt("auth");
                 GenericDao dao = new GenericDao();
-                List<Tokens> tokense = dao.getByParameter(Tokens.class.getSimpleName(), "token", tkn);
+                List<Tokens> tokense;
                 if (RegexU.isValidMail(auth) || RegexU.isValidNick(auth)) {
                     if (tkn.equals("null")) {
                         String pass = (String) jsono.opt("pass");
                         List<Users> list = dao.getAll(Users.class.getSimpleName());
                         Users us = null;
                         for (Users users : list) {
-                            if (users.getMail().equals(auth) || users.getNick().equals(auth)) {
+                            if (users.getMail().equalsIgnoreCase(auth) || users.getNick().equalsIgnoreCase(auth)) {
                                 us = users;
                             }
                         }
