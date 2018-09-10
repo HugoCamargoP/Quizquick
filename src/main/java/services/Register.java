@@ -72,7 +72,6 @@ public class Register extends HttpServlet {
                 user.setMail((String) jsono.opt("email"));
                 String pass = (String) jsono.opt("password");
                 String hash = hash256.convertirSHA256(pass);
-                System.out.println("Holaaaaaaaaaaaaaaaaaaa HASHEO"+hash);
                 user.setPass(hash);
                 GenericDao dao = new GenericDao();
                 dao.save(user);
@@ -98,11 +97,6 @@ public class Register extends HttpServlet {
         pw.flush();
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
