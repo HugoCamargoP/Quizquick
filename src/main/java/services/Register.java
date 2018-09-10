@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
-import util.Hash256;
+import util.Hash;
 
 /**
  *
@@ -58,7 +58,7 @@ public class Register extends HttpServlet {
         BufferedReader br = req.getReader();
         StringBuilder sb = new StringBuilder("");
         JSONObject jsono = null, result = null;
-        Hash256 hash256 = new Hash256();
+        //Hash hash = new Hash();
 
         String str;
         while ((str = br.readLine()) != null) {
@@ -71,7 +71,7 @@ public class Register extends HttpServlet {
                 user.setNick((String) jsono.opt("nick"));
                 user.setMail((String) jsono.opt("email"));
                 String pass = (String) jsono.opt("password");
-                String hash = hash256.convertirSHA256(pass);
+                String hash = Hash.convertirSHA_1(pass);
                 user.setPass(hash);
                 GenericDao dao = new GenericDao();
                 dao.save(user);

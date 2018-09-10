@@ -24,4 +24,10 @@ public class RegexU {
         Matcher m = p.matcher(input);
         return m.matches();
     }
+    
+    public static boolean isValidHash_1 (String input) {
+        Pattern p = Pattern.compile("^[A-Za-z0-9]{40}");
+        Matcher m = p.matcher(input);
+        return m.matches();
+    }
 }

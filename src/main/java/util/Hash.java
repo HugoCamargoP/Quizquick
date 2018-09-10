@@ -12,13 +12,14 @@ import java.security.NoSuchAlgorithmException;
  *
  * @author Ismael
  */
-public class Hash256 {
-    public Hash256() {}
+public class Hash {
+    public Hash() {}
     
-    public String convertirSHA256(String password) {
+    public static String convertirSHA_1(String password) {
         MessageDigest md = null;
         try {
-            md = MessageDigest.getInstance("SHA-256");
+            md = MessageDigest.getInstance("SHA-1");
+            
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return null;
