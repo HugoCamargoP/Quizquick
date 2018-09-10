@@ -82,7 +82,7 @@ public class Login extends HttpServlet {
                     List<Users> list = dao.getAll(Users.class.getSimpleName());
                     jsono = new JSONObject();
                     result = new JSONObject();
-
+                    
                     //jsono.put("userId", "unsuccess");
                     result.put("message", "wrong user or pass");
                     for (Users user : list) {
