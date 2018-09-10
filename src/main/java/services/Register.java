@@ -72,7 +72,8 @@ public class Register extends HttpServlet {
                 user.setMail((String) jsono.opt("email"));
                 String pass = (String) jsono.opt("password");
                 String hash = hash256.convertirSHA256(pass);
-                user.setPass((String) jsono.opt("password"));
+                System.out.println("Holaaaaaaaaaaaaaaaaaaa HASHEO"+hash);
+                user.setPass(hash);
                 GenericDao dao = new GenericDao();
                 dao.save(user);
                 result = new JSONObject();
