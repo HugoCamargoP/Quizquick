@@ -19,7 +19,7 @@ public class RegexU {
         return m.matches();
     }
     
-    public static boolean isNick (String input) {
+    public static boolean isValidNick (String input) {
         Pattern p = Pattern.compile("^[A-Za-z0-9]{5,13}");
         Matcher m = p.matcher(input);
         return m.matches();

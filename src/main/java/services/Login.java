@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
+import util.RegexU;
 
 
 /*
@@ -74,28 +75,36 @@ public class Login extends HttpServlet {
             try {
                 jsono = new JSONObject(sb.toString());
                 String tkn = jsono.optString("tkn", "null");
-                String name = (String) jsono.opt("auth");
+                String auth = (String) jsono.opt("auth");
                 GenericDao dao = new GenericDao();
                 List<Tokens> tokense = dao.getByParameter(Tokens.class.getSimpleName(), "token", tkn);
-                if (tokense.isEmpty() ) {
-                    String pass = (String) jsono.opt("pass");
-                    List<Users> list = dao.getAll(Users.class.getSimpleName());
-                    jsono = new JSONObject();
-                    result = new JSONObject();
-                    
-                    //jsono.put("userId", "unsuccess");
-                    result.put("message", "wrong user or pass");
-                    for (Users user : list) {
-                        if (name.equals(user.getNick()) && pass.equals(user.getPass())) {
+                if (RegexU.isValidMail(auth) || RegexU.isValidNick(auth)) {
+                    if (tokense.isEmpty()) {
+                        String pass = (String) jsono.opt("pass");
+                        List<Users> list = dao.getAll(Users.class.getSimpleName());
+                        jsono = new JSONObject();
+                        result = new JSONObject();
 
-                            jsono = new JSONObject();
-                            jsono.put("result", "success");
-                            jsono.put("tk", "FFFF");
-                            break;
+                        //jsono.put("userId", "unsuccess");
+                        result.put("message", "wrong user or pass");
+                        for (Users user : list) {
+                            if (auth.equals(user.getNick()) && pass.equals(user.getPass())) {
+
+                                jsono = new JSONObject();
+                                jsono.put("result", "success");
+                                jsono.put("tk", "FFFF");
+                                break;
+                            }
+                        }
+                    } else {
+                        if (tokense.get(0).getStatus().equals("1")) {
+
                         }
                     }
                 } else {
-                    
+                    jsono = new JSONObject();
+                    jsono.put("result", "error");
+                    jsono.put("message", "nick or password malformed");
                 }
 
             } catch (JSONException | NullPointerException je) {

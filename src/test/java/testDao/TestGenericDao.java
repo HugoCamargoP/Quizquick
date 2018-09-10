@@ -32,7 +32,7 @@ public class TestGenericDao {
     public static void main(String[] args) {
         //System.out.println(RegexU.isMail("nincub111._-@com.mx"));
         String a = Hash.convertirSHA_1("adssssssssssssssshola"); 
-        System.out.println(RegexU.isValidHash_1(a));
+        System.out.println(RegexU.isValidHash_1("asa"));
     }
     
     
