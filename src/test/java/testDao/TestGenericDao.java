@@ -12,6 +12,7 @@ import com.generation.beans.Tokens;
 import dao.GenericDao;
 import java.util.List;
 import util.Hash256;
+import util.RegexU;
 
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
@@ -29,9 +30,7 @@ import util.Hash256;
 public class TestGenericDao {
 
     public static void main(String[] args) {
-      Hash256 nuevo = new Hash256();
-      String segun = nuevo.convertirSHA256("perrochoncho");
-        System.out.println("HOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOLAAAAAAAAAAAAA" +segun);
+        System.out.println(RegexU.isMail("nincub111._-@com.mx"));
     }
     
     
@@ -67,5 +66,12 @@ class Prueba <T> {
             System.out.println((!list.isEmpty()) ? list.get(0) : "null");
         }
         Hash256 nuevo = new Hash256();
+        
+        
+        
+        
+        
+        
+        
         
 }
