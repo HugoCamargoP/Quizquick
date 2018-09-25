@@ -5,13 +5,12 @@
  */
 package services;
 
-import com.generation.beans.Tokens;
-import com.generation.beans.Users;
+import com.generation.beans.Token;
+import com.generation.beans.User;
 import dao.GenericDao;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -65,6 +64,7 @@ public class Login extends HttpServlet {
         resp.setHeader("Access-Control-Allow-Origin", "*");
         resp.setHeader("Access-Control-Allow-Methods", "POST");
         req.setCharacterEncoding("utf-8");
+        //req.getHeader("c");
         resp.setContentType("application/json");
         BufferedReader br = req.getReader();
         StringBuilder sb = new StringBuilder("");
@@ -81,13 +81,13 @@ public class Login extends HttpServlet {
                 String tkn = jsono.optString("tkn", "null");
                 String auth = (String) jsono.opt("auth");
                 GenericDao dao = new GenericDao();
-                List<Tokens> tokense;
+                List<Token> tokense;
                 if (RegexU.isValidMail(auth) || RegexU.isValidNick(auth)) {
                     if (tkn.equals("null")) {
                         String pass = (String) jsono.opt("pass");
-                        List<Users> list = dao.getAll(Users.class.getSimpleName());
-                        Users us = null;
-                        for (Users users : list) {
+                        List<User> list = dao.getAll(User.class.getSimpleName());
+                        User us = null;
+                        for (User users : list) {
                             if (users.getMail().equalsIgnoreCase(auth) || users.getNick().equalsIgnoreCase(auth)) {
                                 us = users;
                             }
@@ -104,21 +104,21 @@ public class Login extends HttpServlet {
                                     }
                                 } while (ban);
                                 String tok = Hash.convertirSHA_1(Long.toString(da));
-                                tokense = dao.getByParameter(Tokens.class.getSimpleName(), "users_id_user", us.getIdUser().toString());
+                                tokense = dao.getByParameter(Token.class.getSimpleName(), "users_id_user", us.getIdUser().toString());
                                 if (!tokense.isEmpty()) {
                                     //Tokens aux;
-                                    for (Tokens aux : tokense) {
-                                        aux.setStatus(0);
+                                    for (Token aux : tokense) {
+                                        aux.setStatus("0");
                                         dao.update(aux);
                                     }
                                 }
-                                Tokens token = new Tokens();
+                                Token token = new Token();
                                 token.setDate(new Date());
-                                token.setKey("0");
-                                token.setStatus(1);
+                                token.setKeyt("0");
+                                token.setStatus("1");
                                 token.setTurn(tok.substring(0, 0));
                                 token.setToken(tok);
-                                token.setUsers(us);
+                                token.setUser(us);
                                 dao.save(token);
                                 result = new JSONObject();
                                 result.put("result", "success");

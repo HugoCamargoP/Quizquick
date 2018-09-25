@@ -1,24 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 9/09/2018 04:34:07 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated 24/09/2018 11:42:11 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.generation.beans.Subtopics" table="subtopics" catalog="sql9255875" optimistic-lock="version">
+    <class name="com.generation.beans.Subtopic" table="subtopic" catalog="quizquick" optimistic-lock="version">
         <id name="idsubtopics" type="java.lang.Integer">
             <column name="idsubtopics" />
             <generator class="identity" />
         </id>
-        <many-to-one name="topics" class="com.generation.beans.Topics" fetch="select">
-            <column name="topics_id_topic" not-null="true" />
+        <many-to-one name="topic" class="com.generation.beans.Topic" fetch="select">
+            <column name="topic_id_topic" not-null="true" />
         </many-to-one>
         <property name="nombreSubtopic" type="string">
             <column name="nombre_subtopic" length="45" />
         </property>
-        <set name="questionses" table="questions" inverse="true" lazy="true" fetch="select">
+        <property name="subtopicStatus" type="java.lang.Integer">
+            <column name="subtopicStatus" />
+        </property>
+        <set name="questions" table="question" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="subtopics_idsubtopics" not-null="true" />
             </key>
-            <one-to-many class="com.generation.beans.Questions" />
+            <one-to-many class="com.generation.beans.Question" />
         </set>
     </class>
 </hibernate-mapping>

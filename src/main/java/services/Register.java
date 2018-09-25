@@ -5,7 +5,7 @@
  */
 package services;
 
-import com.generation.beans.Users;
+import com.generation.beans.User;
 import dao.GenericDao;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -67,7 +67,7 @@ public class Register extends HttpServlet {
         if (!sb.toString().equals("")) {
             try {
                 jsono = new JSONObject(sb.toString());
-                Users user = new Users();
+                User user = new User();
                 user.setNick((String) jsono.opt("nick"));
                 user.setMail((String) jsono.opt("email"));
                 String pass = (String) jsono.opt("password");

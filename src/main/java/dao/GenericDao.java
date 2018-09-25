@@ -31,11 +31,11 @@ public class GenericDao<T> {
         throw new UnsupportedOperationException("Ocurrio un error en la capa de datos" + he);
     }
 
-    public int save(T t) {
-        int id = 0;
+    public T save(T t) {
+        T id;
         try {
             initOperation();
-            id = (int) session.save(t);
+            id = (T) session.save(t);
             tx.commit();
         } catch (HibernateException he) {
             manejaException(he);

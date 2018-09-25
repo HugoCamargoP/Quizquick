@@ -36,4 +36,10 @@ public class RegexU {
         Matcher m = p.matcher(input);
         return m.matches();
     }
+    
+    public static boolean anagrama (String input) {
+        Pattern p =  Pattern.compile("/[hola]/");
+        Matcher m = p.matcher(input);
+        return m.matches();
+    }
 }

@@ -5,7 +5,8 @@
  */
 package util;
 
-import antlr.Token;
+
+import com.generation.beans.Token;
 import dao.GenericDao;
 import java.util.List;
 

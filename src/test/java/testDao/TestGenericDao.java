@@ -7,9 +7,10 @@ package testDao;
 
 //import com.generation.beans.Modules;
 
-import com.generation.beans.Modules;
-import com.generation.beans.Tokens;
+import com.generation.beans.Module;
+import com.generation.beans.Token;
 import dao.GenericDao;
+import static java.lang.System.out;
 import java.util.Date;
 import java.util.List;
 import util.Hash;
@@ -20,7 +21,9 @@ import util.RegexU;
 //import org.mockito.Mock;
 //import org.mockito.runners.MockitoJUnitRunner;
 
-
+abstract class nada {
+    
+}
 
 
 /**
@@ -30,11 +33,11 @@ import util.RegexU;
 //@RunWith(MockitoJUnitRunner.class)
 public class TestGenericDao {
 
-    public static void main(String[] args) {
-        //System.out.println(RegexU.isMail("nincub111._-@com.mx"));
-        String a = Hash.convertirSHA_1("adssssssssssssssshola");
-        System.out.println(a);
-        System.out.println(RegexU.isValidToken(a + ":11111"));
+    public static void main(String[] Public) {
+        String s = "hola";
+        //s(" mundo");
+        out.println(s);
+        out.println("nada");
         
     }
     
@@ -61,13 +64,13 @@ class Prueba <T> {
      
         public void consultaCol () {
             GenericDao dao = new GenericDao();
-            Tokens t = (Tokens) dao.get(2, Tokens.class);
+            Token t = (Token) dao.get(2, Token.class);
             System.err.println(t != null ? t.toString() : "null");
             
-            List<Tokens> list = dao.getAll(Tokens.class.getSimpleName());
+            List<Token> list = dao.getAll(Token.class.getSimpleName());
             System.out.println((!list.isEmpty()) ? list.get(0) : "null");
             
-            list = dao.getByParameter(Tokens.class.getSimpleName(), "token", "FFFF");
+            list = dao.getByParameter(Token.class.getSimpleName(), "token", "FFFF");
             System.out.println((!list.isEmpty()) ? list.get(0) : "null");
         }
         Hash nuevo = new Hash();

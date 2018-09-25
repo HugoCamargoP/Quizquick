@@ -43,14 +43,19 @@ Contributor(s):
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9255875?zeroDateTimeBehavior=convertToNull</property>
+    <!--    <property name="hibernate.connection.url">jdbc:mysql://sql9.freemysqlhosting.net:3306/sql9255875?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">sql9255875</property>
-    <property name="hibernate.connection.password">X9PIwzUYKJ</property>
-    <mapping resource="com/generation/beans/Modules.hbm.xml"/>
-    <mapping resource="com/generation/beans/Tokens.hbm.xml"/>
-    <mapping resource="com/generation/beans/Users.hbm.xml"/>
-    <mapping resource="com/generation/beans/Subtopics.hbm.xml"/>
-    <mapping resource="com/generation/beans/Questions.hbm.xml"/>
-    <mapping resource="com/generation/beans/Topics.hbm.xml"/>
+    <property name="hibernate.connection.password">X9PIwzUYKJ</property>-->
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/quizquick</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Angelito</property>
+    <mapping resource="com/generation/beans/CorrectAnswer.hbm.xml"/>
+    <mapping resource="com/generation/beans/Module.hbm.xml"/>
+    <mapping resource="com/generation/beans/User.hbm.xml"/>
+    <mapping resource="com/generation/beans/Subtopic.hbm.xml"/>
+    <mapping resource="com/generation/beans/WrongAnswer.hbm.xml"/>
+    <mapping resource="com/generation/beans/Question.hbm.xml"/>
+    <mapping resource="com/generation/beans/Topic.hbm.xml"/>
+    <mapping resource="com/generation/beans/Token.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
