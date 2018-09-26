@@ -79,5 +79,6 @@ public class WrongAnswer {
     public int hashCode() {
         return Objects.hash(getIdWrongAnswer(), getWrongAnswer(), getStatusWrongAnswer(), getQuestion());
     }
+
 }
 
