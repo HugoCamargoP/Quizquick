@@ -80,5 +80,6 @@ public class WrongAnswer {
         return Objects.hash(getIdWrongAnswer(), getWrongAnswer(), getStatusWrongAnswer(), getQuestion());
     }
 
+
 }
 
